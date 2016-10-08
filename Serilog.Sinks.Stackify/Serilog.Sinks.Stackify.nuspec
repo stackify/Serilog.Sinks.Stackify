@@ -7,11 +7,11 @@
     <authors>John Knoll</authors>
     <owners>John Knoll</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-    <projectUrl>https://github.com/jpknoll/Serilog.Sinks.Stackify</projectUrl>
+    <projectUrl>https://github.com/stackify/Serilog.Sinks.Stackify</projectUrl>
     <iconUrl>http://serilog.net/images/serilog-sink-nuget.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Serilog event sink that writes to the stackify service.</description>
-    <copyright>Copyright 2015</copyright>
+    <copyright>Copyright 2016</copyright>
     <tags>serilog logging stackify error</tags>
     <dependencies>
       <dependency id="Serilog" version="1.5.7" />
