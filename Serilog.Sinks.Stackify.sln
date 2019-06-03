@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26621.2
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{50C48CCC-8551-459A-A306-95D84DC3A422}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.Stackify", "Serilog.Sinks.Stackify\Serilog.Sinks.Stackify.csproj", "{E44EC161-7AEF-40F1-9FFC-C98A3F105F23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.Stackify", "Serilog.Sinks.Stackify\Serilog.Sinks.Stackify.csproj", "{E44EC161-7AEF-40F1-9FFC-C98A3F105F23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
