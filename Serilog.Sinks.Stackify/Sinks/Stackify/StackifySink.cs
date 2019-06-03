@@ -27,18 +27,28 @@ namespace Serilog.Sinks.Stackify
     {
         private readonly ErrorGovernor _Governor = new ErrorGovernor();
         private readonly IFormatProvider _formatProvider;
+        private readonly string _apiKey;
+        private readonly string _appName;
+        private readonly string _environment;
         private readonly JsonDataFormatter _dataFormatter;
         private LogClient _logClient = null;
 
         /// <summary>
         /// Construct a sink that saves logs to the specified storage account.
         /// </summary>
-        public StackifySink(IFormatProvider formatProvider)
+        public StackifySink(IFormatProvider formatProvider, string apiKey, string appName, string environment)
         {
             _formatProvider = formatProvider;
+            _apiKey = apiKey;
+            _appName = appName;
+            _environment = environment;
 
             _dataFormatter = new JsonDataFormatter();
             _logClient = new LogClient("StackifyLib.net-serilog", null, null);
+            
+            Config.ApiKey = apiKey;
+            Config.AppName = appName;
+            Config.Environment = environment;
         }
 
 

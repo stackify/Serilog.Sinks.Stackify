@@ -28,20 +28,27 @@ namespace Serilog
         /// Adds a sink that writes log events to the elmah.io webservice.
         /// </summary>
         /// <param name="loggerConfiguration">The logger configuration.</param>
+        /// <param name="apiKey">The api key provided by Stackify.</param>
+        /// <param name="appName">The name of your application.</param>
+        /// <param name="environment">The name of the environment, e.g. Dev / Prod / Stage etc.</param>
         /// <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
         /// <param name="restrictedToMinimumLevel">The minimum log event level required in order to write an event to the sink. Set to Verbose by default.</param>
         /// <returns>Logger configuration, allowing configuration to continue.</returns>
         /// <exception cref="ArgumentNullException">A required parameter is null.</exception>
         public static LoggerConfiguration Stackify(
             this LoggerSinkConfiguration loggerConfiguration,
+            string apiKey,
+            string appName = "",
+            string environment = "",
             IFormatProvider formatProvider = null,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum
             )
-        {
-            if (loggerConfiguration == null) throw new ArgumentNullException("loggerConfiguration");
-
+        {   
+            if (loggerConfiguration == null) throw new ArgumentNullException(nameof(loggerConfiguration));
+            if (string.IsNullOrWhiteSpace(apiKey)) throw new ArgumentNullException(nameof(apiKey));
+            
             return loggerConfiguration
-                .Sink(new StackifySink(formatProvider), restrictedToMinimumLevel);
+                .Sink(new StackifySink(formatProvider, apiKey, appName, environment), restrictedToMinimumLevel);
         }
     }
 }
