@@ -33,11 +33,15 @@ steps:
     script: $Env:SRCCLR_API_TOKEN="$(SRCCLR_API_TOKEN)"; Set-ExecutionPolicy AllSigned -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://download.srcclr.com/ci.ps1')); srcclr scan .;
   enabled: false
 
+- task: CmdLine@2
+  inputs:
+    script: 'dir $(Build.ArtifactStagingDirectory)'
+
 - task: Veracode@3
   inputs:
     ConnectionDetailsSelection: 'Endpoint'
     AnalysisService: 'Veracode'
     veracodeAppProfile: 'Retrace .Net Serilog Library'
     version: 'AZ-Devops-Build-$(build.buildNumber)'
-    filepath: 'Serilog.Sinks.Stackify\bin\Release\net45\Serilog.Sinks.Stackify.dll'
+    filepath: '$(Build.ArtifactStagingDirectory)\Serilog.Sinks.Stackify\bin\Release\net45\Serilog.Sinks.Stackify.dll'
     maximumWaitTime: '360'
