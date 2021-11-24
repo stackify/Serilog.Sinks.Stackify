@@ -26,6 +26,7 @@ steps:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    msbuildArgs: '/p:OutDir=$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   inputs:
@@ -40,6 +41,10 @@ steps:
 - task: CmdLine@2
   inputs:
     script: 'dir $(Build.BinariesDirectory)'
+
+- task: CmdLine@2
+  inputs:
+    script: 'dir $(Build.Repository.LocalPath)'
 
 - task: PowerShell@2
   inputs:
