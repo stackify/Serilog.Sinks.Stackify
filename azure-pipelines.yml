@@ -21,7 +21,14 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: VSBuild@1
+  inputs:
+    solution: 'Serilog.Sinks.Stackify.sln'
+    platform: 'Any CPU'
+    configuration: 'Release'
+
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
     script: $Env:SRCCLR_API_TOKEN="$(SRCCLR_API_TOKEN)"; Set-ExecutionPolicy AllSigned -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://download.srcclr.com/ci.ps1')); srcclr scan .;
+  enabled: false
