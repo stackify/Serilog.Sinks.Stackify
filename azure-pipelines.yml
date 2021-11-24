@@ -40,11 +40,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'dir $(Build.BinariesDirectory)'
-
-- task: CmdLine@2
-  inputs:
-    script: 'dir $(Build.Repository.LocalPath)'
+    script: 'dir $(Build.Repository.LocalPath)\Serilog.Sinks.Stackify\bin\Release\net45'
 
 - task: PowerShell@2
   inputs:
@@ -58,6 +54,6 @@ steps:
     AnalysisService: 'Veracode'
     veracodeAppProfile: 'Retrace .Net Serilog Library'
     version: 'AZ-Devops-Build-$(build.buildNumber)'
-    filepath: '$(Build.ArtifactStagingDirectory)\Serilog.Sinks.Stackify\bin\Release\net45\Serilog.Sinks.Stackify.dll'
+    filepath: '$(Build.ArtifactStagingDirectory)/Serilog.Sinks.Stackify.dll'
     maximumWaitTime: '360'
-  enabled: false
+  enabled: true
