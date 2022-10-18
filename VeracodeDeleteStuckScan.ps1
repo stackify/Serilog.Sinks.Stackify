@@ -1,4 +1,6 @@
 [Net.ServicePointManager]::SecurityProtocol = "Tls12"
+# Set vkey env var
+$Env:vkey="$(vkey)";
 Write-Output "Downloading the latest version of the Veracode Java API"
 $versionstring = curl https://repo1.maven.org/maven2/com/veracode/vosp/api/wrappers/vosp-api-wrappers-java/maven-metadata.xml | findstr /r "latest";
 $version = $versionstring.Trim().replace("<latest>", '');
