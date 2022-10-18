@@ -55,6 +55,8 @@ steps:
 - task: PowerShell@2
   inputs:
     filePath: 'VeracodeDeleteStuckScan.ps1'
+  env:
+    vkey: $(vkey)
 
 - task: Veracode@3
   inputs:
