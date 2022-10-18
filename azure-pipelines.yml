@@ -52,6 +52,10 @@ steps:
     script: $Env:SRCCLR_API_TOKEN="$(SRCCLR_API_TOKEN)"; Set-ExecutionPolicy AllSigned -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://download.srcclr.com/ci.ps1')); srcclr scan .;
   enabled: false
 
+- task: PowerShell@2
+  inputs:
+    filePath: 'VeracodeDeleteStuckScan.ps1'
+
 - task: Veracode@3
   inputs:
     ConnectionDetailsSelection: 'Endpoint'
