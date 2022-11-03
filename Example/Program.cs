@@ -37,7 +37,7 @@ namespace Example
         {
             Log.Logger = new LoggerConfiguration()
                 .WriteTo
-                .Stackify()
+                .Stackify("", "", "")
                 .CreateLogger();
         }
     }
