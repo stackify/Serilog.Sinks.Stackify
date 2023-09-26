@@ -16,6 +16,7 @@ using System;
 using System.IO;
 using Serilog.Core;
 using Serilog.Events;
+using Serilog.Formatting.Json;
 using StackifyLib;
 using StackifyLib.Internal.Logs;
 using StackifyLib.Models;
@@ -27,8 +28,8 @@ namespace Serilog.Sinks.Stackify
     {
         private readonly ErrorGovernor _Governor = new ErrorGovernor();
         private readonly IFormatProvider _formatProvider;
-        private readonly JsonDataFormatter _dataFormatter;
-        private LogClient _logClient = null;
+        private readonly JsonFormatter _jsonFormatter;
+		private LogClient _logClient = null;
 
         /// <summary>
         /// Construct a sink that saves logs to the specified storage account.
@@ -37,7 +38,7 @@ namespace Serilog.Sinks.Stackify
         {
             _formatProvider = formatProvider;
 
-            _dataFormatter = new JsonDataFormatter();
+			_jsonFormatter = new JsonFormatter();
             _logClient = new LogClient("StackifyLib.net-serilog", null, null);
         }
 
@@ -91,7 +92,7 @@ namespace Serilog.Sinks.Stackify
         private string PropertiesToData(LogEvent logEvent)
         {
             var payload = new StringWriter();
-            _dataFormatter.FormatData(logEvent, payload);
+            _jsonFormatter.Format(logEvent, payload);
 
             var data = payload.ToString();
 
