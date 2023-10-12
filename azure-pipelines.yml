@@ -36,6 +36,15 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:OutDir=$(Build.ArtifactStagingDirectory)'
 
+- task: CopyFiles@2
+  displayName: Copy Nuget Package
+  inputs:
+    SourceFolder: "$(Build.SourcesDirectory)"
+    flattenFolders: true
+    Contents: |
+      **\Release\*.nupkg
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
