@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <PackageId>Serilog.Sinks.Stackify</PackageId>
-    <Version>3.0.2</Version>
+    <Version>3.0.2-beta1</Version>
     <Authors>Serilog.Sinks.Stackify</Authors>
     <Company>Stackify</Company>
     <Product>Serilog Stackify Sink</Product>
