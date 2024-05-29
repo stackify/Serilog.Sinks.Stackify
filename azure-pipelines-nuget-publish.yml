@@ -1,0 +1,49 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
+trigger: none
+pr: none
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: 'Serilog.Sinks.Stackify/Serilog.Sinks.Stackify.csproj'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    msbuildArgs: '/p:OutDir=$(Build.ArtifactStagingDirectory)'
+
+- task: CopyFiles@2
+  displayName: Copy Nuget Package
+  inputs:
+    SourceFolder: "$(Build.SourcesDirectory)"
+    flattenFolders: true
+    Contents: |
+      **\Release\*.nupkg
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: CmdLine@2
+  inputs:
+    script: 'dir $(Build.ArtifactStagingDirectory)'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet push'
+  inputs:
+    command: push
+    nuGetFeedType: external
+    publishFeedCredentials: 'NuGet - Todd'
